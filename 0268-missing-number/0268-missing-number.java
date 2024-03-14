@@ -1,17 +1,13 @@
 class Solution {
     public int missingNumber(int[] nums) {
-        boolean[] checkArray = new boolean[nums.length + 1];
+        Arrays.sort(nums);
         
-        for (int x : nums) {
-            checkArray[x] = true;
-        }
-        
-        for (int i = 0; i < checkArray.length; i++) {
-            if (checkArray[i] == false) {
+        for (int i = 0; i <= nums.length; i++) { 
+            if (i == nums.length || nums[i] != i) {
                 return i;
             }
         }
         
-        return nums.length;
+        return -1;
     }
 }
