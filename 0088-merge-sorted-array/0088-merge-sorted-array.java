@@ -1,40 +1,34 @@
 class Solution {
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         
-        if (m < 1 && m+n<=1) {
-            nums1[0] = nums2[0];
-            return;
-        }
-        
-        if (n < 1 && m+n<=1) {
-            return;
-        }
-        
-        int idx1 = 0, idx2 = 0;
+        int[] newArr = new int[m+n];
+        int idx1 = 0, idx2 = 0, idx = 0;
         
         while (idx1 < m && idx2 < n) {         
-             if (nums1[idx1] >= nums2[idx2]) {
-                shift(nums1,idx1);
-                nums1[idx1] = nums2[idx2];
-                idx1++;
-                idx2++;
-                m++;
+            if (nums1[idx1] < nums2[idx2]) {
+                newArr[idx++] = nums1[idx1++];
             }
+            
+            else if (nums2[idx2] < nums1[idx1]) {
+                newArr[idx++] = nums2[idx2++];
+            }
+                
             else {
-                idx1++;
+                newArr[idx++] = nums1[idx1++];
+                newArr[idx++] = nums2[idx2++];
             }
         }
         
-        while (idx2 < n) {
-            nums1[idx1++] = nums2[idx2++];   
+         while (idx1 < m) {
+            newArr[idx++] = nums1[idx1++];   
         }
-    }
-    
-    private void shift(int[] nums, int idx) {
-        int i = nums.length-1;
-        while (i > idx) {
-            nums[i] = nums[i-1];
-            i--;
+
+        while (idx2 < n) {
+            newArr[idx++] = nums2[idx2++];   
+        }
+        
+        for (int x = 0; x < m+n ; x++) {
+            nums1[x] = newArr[x];
         }
     }
 }
