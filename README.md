@@ -1,1 +1,1 @@
-# 30-Days-of-Leetcode
+# LeetCode Sols
